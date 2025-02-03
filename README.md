@@ -1,6 +1,6 @@
 # Poo-Reto-6
-##Parte 1
-1.
+## Parte 1
+1. Se crea la función `basic_operations` en donde mediante condicionales se ejecutan sumas, restas, multiplicaciones y divisiones. Mediante las excepciones se evita las indeterminaciones.
 ```python
 def basic_operations(a, b, operator):
     if operator == '+':
@@ -31,7 +31,7 @@ except Exception as e:
     print("Ocurrió un error inesperado:", e)
 ```
 
-2.
+2. Mediante la función `palindromo`, se toma la palabra ingresada, se convierten todas las letras en minúsculas, luego se calcula el largo de la palabra y se realiza una comparación de carácter por carácter. Con las excepciones evitamos que la entrada este vacia. 
 ```python
 def palindromo(palabra):
     # Se convierte a minúsculas y se eliminan espacios
@@ -59,7 +59,7 @@ except Exception as e:
     print("Ocurrió un error inesperado:", e)
 ```
 
-3.
+3. 
 ```python
 def prime_numbers(n):
     # Verificación de si el número es primo o no
