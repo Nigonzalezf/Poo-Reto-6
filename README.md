@@ -59,7 +59,7 @@ except Exception as e:
     print("Ocurrió un error inesperado:", e)
 ```
 
-3. 
+3. En este caso fue propuesto el uso de dos funciones, la primera utilizada para la verificación de que cada numero es o no es primo, y la segunda es utilizada para crear una lista con los numeros que si cumplen con la condición. El uso de excepciones verifica que el usuario haya digitado correctamente los numeros a verificar.
 ```python
 def prime_numbers(n):
     # Verificación de si el número es primo o no
@@ -93,7 +93,7 @@ except ValueError as e:
 except Exception as e:
     print("Ocurrió un error inesperado:", e)
 ```
- 4. 
+ 4. En este ejercicio es importante verificar inicialmente, si la lista cuenta con mas de dos elementos para poder efectuar una suma, en ese caso, el programa imprime un mensaje que aclara que no es posible seguir con el proceso. Seguido de esto se realizan diversas sumas de todos los pares consecutivos encontrados en la lista, y se comparan entre si para encontrar el resultado mas grande.
 ```python
 def higher_consecutive_add(num_list):
     if len(num_list) < 2:
@@ -130,8 +130,8 @@ except Exception as e:
     print("Ocurrió un error inesperado:", e)
 ```
 
-5. 
-```pyton
+5. Cada candena (palabra) es ordenada para asi crear claves y compararlas entre si. Las cadenas que cuenten con la misma clave, son seleccionadas para la creacion de una lista que es mostrada en la salida del programa.
+```python
 def same_characters(word_list):
     result = []
     groups = {}
@@ -171,4 +171,68 @@ try:
 
 except Exception as e:
     print("Ocurrió un error inesperado:", e)
+```
+
+## Parte 2
+Para la realización de esta parte del reto, se toma el paquete `shapes`, y se le implementan las distintas excepciones que se consideren pertinentes en las clases pertenecientes a cada figura.
+```python
+import math
+
+class ShapeError(Exception):
+    # Excepción personalizada para errores relacionados con figuras geométricas
+    pass
+
+class Shape:
+    def area(self):
+        raise NotImplementedError("El método 'area' debe ser implementado por las subclases")
+    def perimeter(self):
+        raise NotImplementedError("El método 'perimeter' debe ser implementado por las subclases")
+
+class Circle(Shape):
+    def __init__(self, radius):
+        if radius <= 0:
+            raise ShapeError("El radio debe ser un número positivo.")
+        self.radius = radius
+    def area(self):
+        return math.pi * self.radius ** 2
+    def perimeter(self):
+        return 2 * math.pi * self.radius
+
+class Rectangle(Shape):
+    def __init__(self, width, height):
+        if width <= 0 or height <= 0:
+            raise ShapeError("El ancho y el alto deben ser números positivos.")
+        self.width = width
+        self.height = height
+    def area(self):
+        return self.width * self.height
+    def perimeter(self):
+        return 2 * (self.width + self.height)
+
+class Triangle(Shape):
+    def __init__(self, a, b, c):
+        if a <= 0 or b <= 0 or c <= 0:
+            raise ShapeError("Los lados del triángulo deben ser números positivos.")
+        # Validación: los lados deben cumplir la desigualdad triangular
+        if a + b <= c or a + c <= b or b + c <= a:
+            raise ShapeError("Los lados proporcionados no forman un triángulo válido.")
+        self.a = a
+        self.b = b
+        self.c = c
+    def area(self):
+        s = (self.a + self.b + self.c) / 2  
+        return math.sqrt(s * (s - self.a) * (s - self.b) * (s - self.c))
+    def perimeter(self):
+        return self.a + self.b + self.c
+
+# Ejemplo de uso con manejo de excepciones
+try:
+    c = Circle(-5)  # Esto generará una excepción
+except ShapeError as e:
+    print(f"Error: {e}")
+
+try:
+    t = Triangle(3, 4, 10)  # Esto también generará una excepción
+except ShapeError as e:
+    print(f"Error: {e}")
 ```
